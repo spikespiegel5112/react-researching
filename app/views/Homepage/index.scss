@@ -1,34 +1,105 @@
 $red: #f20000;
 .homepage_container {
-  display: flex;
+  display: block;
   width: 100%;
   height: 100vh;
+  &.active {
+    > .title {
+      opacity: 0;
+    }
+  }
+
   // min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  flex-direction: inherit;
-  overscroll-behavior: none;
-  .title {
+  > .title {
     color: $red;
     font-size: 2rem;
     font-family: "Eurostile Extended Regular";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    transition: top 0.3s;
+    transition: opacity 0.3s;
   }
   .startbutton {
-    display: block;
-    width: 2rem;
-    height: 2rem;
-    border: 3px solid $red;
+    display: none;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid $red;
     border-radius: 50%;
     transform: scale(0, 0);
     transition: all 0.8s ease;
-    animation: startbutton infinite 5s ease 2s;
-    bottom: 3rem;
+    animation: startbutton infinite 2.5s ease-out;
     position: absolute;
     cursor: pointer;
+    bottom: 20%;
+    left: 50%;
+    // transform: translate(-50%, -50%);
     &.active {
-      transform: scale(1, 1);
+      display: block;
+      // transform: scale(1, 1);
     }
   }
+
+  .entrance {
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: inherit;
+    overscroll-behavior: none;
+    opacity: 0;
+    &.active {
+      display: flex;
+      opacity: 1;
+    }
+  }
+
+  .main {
+    .menubg {
+      opacity: 0;
+      width: 12rem;
+      height: 100vh;
+      left: -10rem;
+      transition:
+        left 0.3s,
+        opacity 0.3s;
+      > span {
+        display: block;
+        background-color: red;
+        position: absolute;
+      }
+      .bg1 {
+        width: 10rem;
+        height: 100vh;
+        clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+        left: 0;
+        top: 0;
+      }
+      .bg2 {
+        width: 2rem;
+        height: 11rem;
+        clip-path: polygon(40% 0%, 90% 0%, 70% 45%, 0% 100%);
+        left: 11rem;
+        top: 0;
+      }
+      .title {
+        font-size: 0.5rem;
+        font-family: "Eurostile Extended Regular";
+        position: absolute;
+        top: 0.5rem;
+        left: 1rem;
+        z-index: 1;
+        color: #fff;
+      }
+      &.active {
+        left: 0;
+        opacity: 1;
+      }
+    }
+  }
+
   .bg {
     .stripe {
       ul {
@@ -44,11 +115,26 @@ $red: #f20000;
 @keyframes startbutton {
   0% {
     transform: scale(1, 1);
+    opacity: 1;
   }
-  50% {
-    transform: scale(1.05, 1.05);
+  5% {
+    opacity: 1;
   }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+  99% {
+    transform: scale(1.2, 1.2);
+    opacity: 0;
+  }
+
   100% {
     transform: scale(1, 1);
+
+    opacity: 0;
   }
 }
