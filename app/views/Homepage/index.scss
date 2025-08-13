@@ -1,0 +1,54 @@
+$red: #f20000;
+.homepage_container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  // min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: inherit;
+  overscroll-behavior: none;
+  .title {
+    color: $red;
+    font-size: 2rem;
+    font-family: "Eurostile Extended Regular";
+  }
+  .startbutton {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid $red;
+    border-radius: 50%;
+    transform: scale(0, 0);
+    transition: all 0.8s ease;
+    animation: startbutton infinite 5s ease 2s;
+    bottom: 3rem;
+    position: absolute;
+    cursor: pointer;
+    &.active {
+      transform: scale(1, 1);
+    }
+  }
+  .bg {
+    .stripe {
+      ul {
+        li {
+          width: 2px;
+          height: 3rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes startbutton {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 1.05);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}

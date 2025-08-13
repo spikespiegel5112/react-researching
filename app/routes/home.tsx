@@ -1,5 +1,5 @@
-import type { Route } from "./+types/home";
-import Welcome from "../views/welcome/welcome";
+// import type { Route } from "./+types/home";
+// import Welcome from "../views/welcome/welcome";
 
 // export function meta({}: Route.MetaArgs) {
 //   return [
@@ -8,6 +8,6 @@ import Welcome from "../views/welcome/welcome";
 //   ];
 // }
 
-export default function Home() {
-  return <Welcome />;
-}
+// export default function Home() {
+//   return <Welcome />;
+// }
