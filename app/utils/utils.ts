@@ -1,100 +1,4 @@
-const utils = {
-  //千帆流式接口js调用demo
-  $parseSteamData: (
-    url: string,
-    access_token: string,
-    body: any,
-    onMessage: any,
-    onError: any
-  ) => {
-    body.stream = true;
-    const decoder = new TextDecoder("utf-8");
-    let buffer: any = "";
-    let dataMsgBuffer = "";
-    const processMessage = (reader: any) => {
-      reader
-        .read()
-        .then((content: any) => {
-          buffer += decoder.decode(content.value, { stream: !content.done });
-          const lines = buffer.split("\n");
-
-          buffer = lines.pop();
-          let bufferObj;
-          try {
-            bufferObj = JSON.parse(buffer);
-          } catch (error) {}
-
-          if (typeof bufferObj === "object") {
-            onError({
-              type: "ERROR",
-              content: `Error code(${bufferObj.error_code}): ${bufferObj.error_msg}`,
-              ...bufferObj,
-            });
-          } else {
-            lines.forEach((line: any) => {
-              if (line == "") {
-                //读取到空行，一个数据块发送完成
-                onMessage({
-                  type: "DATA",
-                  content: JSON.parse(dataMsgBuffer),
-                });
-                dataMsgBuffer = "";
-                return;
-              }
-              let [type] = line.split(":", 1);
-              let content = line.substring(type.length + 1);
-
-              if (type == "data") {
-                //数据块没有收到空行之前放入buffer中
-                dataMsgBuffer += content.trim();
-              } else if (type == "" && content != "") {
-                //服务端发送的注释，用于保证链接不断开
-                onMessage({
-                  type: "COMMENT",
-                  content: content.trim(),
-                });
-              } else {
-                onMessage({
-                  type: type,
-                  content: content.trim(),
-                });
-              }
-            });
-
-            if (!content.done) {
-              processMessage(reader);
-            } else {
-              onMessage({
-                type: "END",
-              });
-            }
-          }
-        })
-        .catch((error: any) => {
-          console.log(error);
-        });
-    };
-    fetch(`${url}?access_token=${access_token}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-      .then((response: any) => {
-        console.log(response);
-        const reader = response.body.getReader();
-        processMessage(reader);
-      })
-      .then((reader) => {})
-      .catch((error) => {
-        console.log(error);
-        onError({
-          type: "ERROR",
-          content: "aaaa",
-        });
-      });
-  },
+const _utils = {
   $objectToUrlString: (query: DAMNU_ENABLE) => {
     let result = "";
     Object.keys(query).forEach((item: string, index: number) => {
@@ -321,5 +225,6 @@ const utils = {
     return result;
   },
 } as any;
+const utils = _utils;
 
 export default utils;
