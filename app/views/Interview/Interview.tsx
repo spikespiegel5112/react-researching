@@ -1,10 +1,6 @@
-import { Outlet } from "react-router";
-import utils from "@//utils/utils.ts";
-
 import { useEffect, useState } from "react";
 import "./index.scss";
-import cityOverviewImage from "@/assets/image/City Overview 1080p.jpg"; // ✅ 使用 import
-export default function Homepage() {
+export default function Interview() {
   const [startButtonActive, setStartButtonActive] = useState(false);
   const [entranceActive, setEntranceActive] = useState(false);
   const [enterActive, setEnterActive] = useState(false);
@@ -17,11 +13,6 @@ export default function Homepage() {
   ];
 
   useEffect(() => {
-    utils.$remResizing({
-      baseline: 320,
-      fontSize: 30,
-      threshold: 640,
-    });
     setEntranceActive(true);
     setTimeout(() => {
       setStartButtonActive(true);
@@ -38,7 +29,7 @@ export default function Homepage() {
   };
 
   return (
-    <div className={"homepage_container"}>
+    <div className={"interview_container"}>
       <div className={"entrance night " + (entranceActive ? "active" : "")}>
         <div className={"title"}>BAOBAOJS</div>
         <a
@@ -61,10 +52,6 @@ export default function Homepage() {
             <div className="title">BAOBAOJS</div>
           </div>
         </div>
-      </div>
-
-      <div className="layout_container">
-        <Outlet />
       </div>
     </div>
   );
