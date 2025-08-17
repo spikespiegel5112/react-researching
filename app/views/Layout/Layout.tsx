@@ -1,14 +1,15 @@
 import { Outlet, Route } from "react-router";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import utils from "@//utils/utils.ts";
 
 import { useEffect, useState } from "react";
 import "./index.scss";
 export default function Homepage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [startButtonActive, setStartButtonActive] = useState(false);
-  const [entranceActive, setEntranceActive] = useState(false);
+  const [entranceActive, setEntranceActive] = useState(true);
   const [enterActive, setEnterActive] = useState(false);
   const [bgActive, setBgActive] = useState(false);
 
@@ -34,20 +35,20 @@ export default function Homepage() {
       fontSize: 30,
       threshold: 640,
     });
-    setEntranceActive(true);
     setTimeout(() => {
       setStartButtonActive(true);
     }, 300);
-    handleEnter();
+
+    if (location.pathname !== "/") {
+      handleEnter();
+    }
   }, []);
 
   const handleEnter = () => {
     setEntranceActive(false);
-    setStartButtonActive(false);
     setEnterActive(true);
-    setTimeout(() => {
-      setBgActive(true);
-    }, 800);
+    setStartButtonActive(false);
+    setBgActive(true);
   };
 
   const handleNavigate = (item: MenuList) => {
@@ -55,7 +56,7 @@ export default function Homepage() {
   };
 
   return (
-    <div className={"homepage_container"}>
+    <div className="layout_container">
       <div className={"entrance night " + (entranceActive ? "active" : "")}>
         <div className={"title"}>BAOBAOJS</div>
         <a
@@ -64,8 +65,8 @@ export default function Homepage() {
         ></a>
       </div>
 
-      <div className={"main " + (enterActive ? "active" : "")}>
-        <div className={"menu " + (bgActive ? "active" : "")}>
+      <aside className={"menu " + (enterActive ? "active" : "")}>
+        <div className={"main " + (bgActive ? "active" : "")}>
           <div className="menubg">
             <span className="bg1">
               <div className="rightglow"></div>
@@ -85,11 +86,11 @@ export default function Homepage() {
             </ul>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <div className="layout_container">
+      <main className="main">
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 }

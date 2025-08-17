@@ -8,5 +8,8 @@ export {}
 declare global {
   const Button: typeof import('antd')['Button']
   const DatePicker: typeof import('antd')['DatePicker']
+  const Form: typeof import('antd')['Form']
   const Input: typeof import('antd')['Input']
+  const Pagination: typeof import('antd')['Pagination']
+  const Table: typeof import('antd')['Table']
 }

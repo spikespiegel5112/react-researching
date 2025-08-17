@@ -117,11 +117,10 @@ const _utils = {
     const flattenRouteList: RouteConfigEntry[] = [];
     const looper = (children: RouteConfigEntry[]) => {
       children.forEach((item) => {
-        let _item = JSON.parse(JSON.stringify(item));
+        const _item = JSON.parse(JSON.stringify(item));
         _item.children = undefined;
 
-        if (!Array.isArray(item.children) || item.children.length === 0) {
-        } else {
+        if (item.children instanceof Array && item.children.length > 0) {
           looper(item.children);
         }
         flattenRouteList.push(_item);

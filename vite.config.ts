@@ -16,7 +16,14 @@ export default defineConfig({
     AutoImport({
       imports: [
         {
-          antd: ["Button", "DatePicker", "Input"],
+          antd: [
+            "Button",
+            "DatePicker",
+            "Form",
+            "Input",
+            "Table",
+            "Pagination",
+          ],
         },
       ],
       dts: "src/auto-imports.d.ts", // 生成类型声明文件
