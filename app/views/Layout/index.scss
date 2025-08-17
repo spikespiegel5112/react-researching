@@ -110,7 +110,7 @@ $red: #f20000;
     }
     .menu {
       opacity: 0;
-      width: 12rem;
+      width: 6rem;
       height: 100vh;
       left: -10rem;
       position: absolute;
@@ -145,7 +145,7 @@ $red: #f20000;
           left: 0;
           top: 0;
         }
-        .right-glow {
+        .rightglow {
           position: absolute;
           inset: 0;
 
@@ -156,29 +156,29 @@ $red: #f20000;
                 #fff 50%,
                 transparent 100%
               )
-              100% / 100% 300% no-repeat,
+              100% / 100% 50% no-repeat,
             linear-gradient(
                 to bottom,
                 transparent 0%,
-                rgba(255, 255, 255, 0.9) 50%,
+                #fff 50%,
                 transparent 100%
               )
-              100% / 100% 300% no-repeat;
+              100% / 100% 50% no-repeat;
 
           background-size:
-            100% 300%,
-            100% 300%;
+            100% 20%,
+            100% 20%;
           animation:
             verticalFlow 20s linear infinite,
             randomSize 40s ease-in-out infinite;
 
           /* 超窄右侧区域 */
-          -webkit-mask: linear-gradient(to right, transparent 80%, #fff 100%);
-          clip-path: polygon(0% 0%, 100% 0%, 96% 100%, 0% 100%);
+          -webkit-mask: linear-gradient(to right, transparent 95%, #fff 100%);
+          // clip-path: polygon(0% 0%, 100% 0%, 96% 100%, 0% 100%);
 
           /* 轻微模糊让亮线变柔和 */
           filter: blur(1px) brightness(4);
-          box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.6);
+          box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.1);
           @keyframes verticalFlow {
             0%,
             100% {
@@ -222,16 +222,15 @@ $red: #f20000;
             }
           }
         }
-        .bg1 {
-        }
+
         .bg1,
         .mask .bg1 {
-          width: 10rem;
+          width: 100%;
           height: 100vh;
-          clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
+          // clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 100%);
           left: 0;
           top: 0;
-          filter: drop-shadow(0 0 15px rgba(52, 152, 219, 1));
+          filter: drop-shadow(0 0 15px rgb(255, 255, 255));
         }
         .bg2,
         .mask .bg2 {

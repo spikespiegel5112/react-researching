@@ -42,7 +42,7 @@ export default function Interview() {
         <div className={"menu " + (bgActive ? "active" : "")}>
           <div className="menubg">
             <span className="bg1">
-              <div className="right-glow"></div>
+              <div className="rightglow"></div>
             </span>
             <span className="bg2"></span>
             <div className="mask">

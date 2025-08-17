@@ -51,12 +51,10 @@ export default function Homepage() {
         <div className={"menu " + (bgActive ? "active" : "")}>
           <div className="menubg">
             <span className="bg1">
-              <div className="right-glow"></div>
+              <div className="rightglow"></div>
             </span>
-            <span className="bg2"></span>
             <div className="mask">
               <span className="bg1"></span>
-              <span className="bg2"></span>
             </div>
             <div className="title">BAOBAOJS</div>
           </div>
