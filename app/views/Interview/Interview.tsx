@@ -6,12 +6,6 @@ export default function Interview() {
   const [enterActive, setEnterActive] = useState(false);
   const [bgActive, setBgActive] = useState(false);
 
-  const menuList = [
-    {
-      title: "文心一言",
-    },
-  ];
-
   useEffect(() => {
     setEntranceActive(true);
     setTimeout(() => {

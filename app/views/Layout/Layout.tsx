@@ -1,18 +1,30 @@
-import { Outlet } from "react-router";
+import { Outlet, Route } from "react-router";
+import { useNavigate } from "react-router";
 import utils from "@//utils/utils.ts";
 
 import { useEffect, useState } from "react";
 import "./index.scss";
-import cityOverviewImage from "@/assets/image/City Overview 1080p.jpg"; // ✅ 使用 import
 export default function Homepage() {
+  const navigate = useNavigate();
+
   const [startButtonActive, setStartButtonActive] = useState(false);
   const [entranceActive, setEntranceActive] = useState(false);
   const [enterActive, setEnterActive] = useState(false);
   const [bgActive, setBgActive] = useState(false);
 
-  const menuList = [
+  interface MenuList {
+    title: string;
+    id: string;
+  }
+
+  const menuList: MenuList[] = [
     {
       title: "文心一言",
+      id: "erniebot",
+    },
+    {
+      title: "面试题",
+      id: "Interview",
     },
   ];
 
@@ -26,6 +38,7 @@ export default function Homepage() {
     setTimeout(() => {
       setStartButtonActive(true);
     }, 300);
+    handleEnter();
   }, []);
 
   const handleEnter = () => {
@@ -35,6 +48,10 @@ export default function Homepage() {
     setTimeout(() => {
       setBgActive(true);
     }, 800);
+  };
+
+  const handleNavigate = (item: MenuList) => {
+    navigate(utils.$findRoutePathById(item.id));
   };
 
   return (
@@ -57,6 +74,15 @@ export default function Homepage() {
               <span className="bg1"></span>
             </div>
             <div className="title">BAOBAOJS</div>
+          </div>
+          <div className="list">
+            <ul>
+              {menuList.map((item) => (
+                <li key={item.title} onClick={() => handleNavigate(item)}>
+                  <a>{item.title}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
